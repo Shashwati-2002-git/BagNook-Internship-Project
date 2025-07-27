@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-sccale = 1.0">
+        <title>Contact Us | BagNook</title>
+         <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            body {
+                background-color: #f1f3f6;
+                color: #333;
+            }
+
+            .contact-container {
+                max-width: 1000px;
+                margin: 40px auto;
+                padding: 20px;
+                background-color: white;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                border-radius: 8px;
+            }
+
+            h1 {
+                text-align: center;
+                color: #004d40;
+                margin-bottom: 30px;
+            }
+
+            .contact-form {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+
+            .form-group {
+                flex: 1 1 45%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .form-group label {
+                color: #004d40;
+                font-weight: 500;
+                margin-bottom: 6px;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                resize: vertical;
+            }
+
+            .form-group textarea {
+                min-height: 120px;
+            }
+
+            .submit-btn {
+                background-color: #004d40;
+                color: white;
+                border: none;
+                padding: 12px 24px;
+                font-size: 16px;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 20px;
+                transition: background 0.3s;
+            }
+
+            .submit-btn:hover {
+                background-color: #00695c;
+            }
+
+            .contact-info {
+                margin-top: 40px;
+                color: #333;
+            }
+
+            .contact-info h3 {
+                font-size: 20px;
+                margin-bottom: 10px;
+                color: #004d40;
+            }
+
+            .contact-info p {
+                font-size: 15px;
+                margin-bottom: 8px;
+            }
+
+            @media (max-width: 768px) {
+                .form-group {
+                    flex: 1 1 100%
+                }
+            }
+        </style>
+        <body>
+            <div class = "contact-container">
+                <h1>Contact Us</h1>
+
+                <form class = "contact-form">
+                    <div class = "form-group">
+                        <label for = "name">Your Name</label>
+                        <input type = "text" id = "name" placeholder = "Enter your name" required>
+                    </div>
+
+                    <div class = "form-group">
+                        <label for = "email">Your Email</label>
+                        <input type = "email" id = "email" placeholder = "Enter your email" required>
+                    </div>
+
+                    <div class = "form-group" style = "flex: 1 1 100%;">
+                        <label for = "message">Your Message</label>
+                        <textarea id = "message" placeholder = "How can we help you?" required></textarea>
+                    </div>
+
+                    <button type = "submit" class = "submit-btn">Send Message</button>
+                </form>
+
+                <div class = "contact-info">
+                    <h3>BagNook Office Address:</h3>
+                    <p>BagNook Pvt. Ltd.</p>
+                    <p>Sector - 4, Bokaro Steel City</p>
+                    <p>Bokaro, Jharkhand - 827004</p>
+                
+                    <h3>Email & Phone:</h3>
+                    <p>Email: support@bagnook.com</p>
+                    <p>Phone: +91-9876543210</p>
+                </div>
+            </div>
+        </body>
+    </head>
+</html>

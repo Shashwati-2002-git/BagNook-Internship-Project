@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <title>BagNook - Homepage</title>
+        <link href = "https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles/index.css">
+    </head>
+    <body>
+        <header>
+            <div class = "logo">BagNook</div>
+            <div class = "search-container">
+                <input id="searchInput" type = "text" placeholder = "Search for Bags, Brands and More...">
+                <button onclick="handleSearch()">Search</button>
+            </div>
+            <div class = "nav-icons">
+                <div class = "profile-dropdown">
+                    <a href="#" id="loginLink">
+                        <div class="profile-link">
+                            <img class="profile-pic" src="images/Profile_Icon_Design.jpg" alt="Profile Picture">
+                            <span id="loginText">Login</span>
+                        </div>
+                    </a>
+                    <div class = "profile-menu">
+                        <a href="#">👤 My Profile</a>
+                        <a href="#">📦 Orders</a>
+                        <a href="#">❤️ Wishlist</a>
+                        <a href="#">🎁 Rewards</a>
+                        <a href="#">🎉 Gift Cards</a>
+                    </div>
+                </div>
+                <a href = "order-summary.html" class = "cart-link">
+                    <img class = "cart-pic" src = "images/Transparent_Cart_Logo_Design_Icon.png" alt = "Cart">
+                </a>
+                <a href = "become_seller.html" class = "seller-link">
+                    <img class = "seller-pic" src = "images/Seller_Design_Icon.jpg" alt = "Become a Seller">
+                    Become A Seller
+                </a>
+            </div>
+            <div class = "menu-container">
+                <span class = "menu-dot" onclick = "toggleMenu()">⋮</span>
+                <div class = "dropdown-menu" id = "dropdownMenu">
+                    <a href="#">🔔 Notification</a>
+                    <a href="#">⚙️ Preferences</a>
+                    <a href="#">📞 24X7 Customer Care</a>
+                    <a href="#">📢 Advertise</a>
+                    <a href="#">⬇️ Download App</a>
+                </div> 
+            </div>
+        </header>
+
+        <div class = "hero-banner">
+            <div class = "slideshow-container">
+                <img class = "slide" src = "images/Banner_1.jpeg" alt = "Slide 1">
+                <img class = "slide" src = "images/Banner_2.jpg" alt = "Slide 2">
+                <img class = "slide" src = "images/Banner_3.jpeg" alt = "Slide 3">
+                <img class = "slide" src = "images/Banner_4.jpg" alt = "Slide 4">
+                <img class = "slide" src = "images/Banner_5.jpg" alt = "Slide 5">
+                <img class = "slide" src = "images/Banner_6.jpeg" alt = "Slide 6">
+                <img class = "slide" src = "images/Banner_7.jpeg" alt = "Slide 7">
+                <img class = "slide" src = "images/Banner_8.jpg" alt = "Slide 8">
+            </div>
+        </div>
+
+        <div class = "container">
+            <div class = "item" onclick = "redirectToProducts(1)">
+                <img src = "images/Casual_Bag.jpg" alt = "Casual Bags">
+                <span>Casual Bags</span>
+            </div>
+        
+            <div class = "item" onclick = "redirectToProducts(2)">
+                <img src = "images/Handbag.jpg" alt = "Handbags">
+                <span>Handbags</span>
+            </div>
+
+            <div class = "item" onclick = "redirectToProducts(3)">    
+                <img src = "images/Travel_Bag.jpg" alt = "Travel Bags">
+                <span>Travel Bags</span>
+            </div>
+
+            <div class = "item" onclick = "redirectToProducts(4)">
+                <img src = "images/School_Bag.jpg" alt = "School/College Bags">
+                <span>Office/Work Bags</span>
+            </div>
+        
+            <div class = "item" onclick = "redirectToProducts(5)">             
+                <img src = "images/Gym_Bag.jpg" alt = "Gym Bags">
+                <span>Gym Bags</span>
+            </div>
+
+            <div class = "item" onclick = "redirectToProducts(6)">              
+                <img src = "images/Laptop_Bag.jpg" alt = "Laptop Bags">
+                <span>Laptop Bags</span>
+            </div>
+        
+            <div class = "item" onclick = "redirectToProducts(7)">               
+                <img src = "images/Shopping_Bag.jpeg" alt = "Shopping Bags">
+                <span>Shopping Bags</span>
+            </div>
+        
+            <div class = "item" onclick = "redirectToProducts(8)">             
+                <img src = "images/Camera_Bags.jpeg" alt = "Camera Bags">
+                <span>Camera Bags</span>
+            </div>
+        
+            <div class = "item" onclick = "redirectToProducts(9)">               
+                <img src = "images/Evening_Bags.jpg" alt = "Evening/Party Bags">
+                <span>Evening/Party Bags</span>
+            </div>
+        
+            <div class = "item" onclick = "redirectToProducts(10)">               
+                <img src = "images/Clutches.jpg" alt = "Clutches/Purses">
+                <span>Clutches/Purses</span>
+            </div>
+        </div>
+
+        <div class = "product-section">
+            <h2>Trending Bags</h2>
+            <div class = "product-list">
+                <div class = "product">
+                    <img src = "images/Classic_Handbag.avif" alt = "Classic Handbag">
+                    <p>Classic Handbag - ₹499</p>
+                </div>
+                <div class = "product">
+                    <img src = "images/Leather_Backpack.jpg" alt = "Leather Backpack">
+                    <p>Leather Backpack - ₹999</p>
+                </div>
+                <div class = "product">
+                    <img src = "images/Stylish_Tote_Bag.jpg" alt = "Stylish Tote Bag">
+                    <p>Stylish Tote - ₹799</p>                    
+                </div>
+                <div class = "product">
+                    <img src = "images/Travel_Duffel.jpg" alt = "Travel Duffel">
+                    <p>Travel Duffel - ₹1199</p>
+                </div> 
+                <div class = "product">
+                    <img src = "images/Eco_Friendly_Satchel.jpg" alt = "Eco-Friedly Satchel">
+                    <p>Eco-Satchel - ₹499</p>
+                </div> 
+                <div class = "product">
+                    <img src = "images/Eco_Friendly_Carrybag.jpg" alt = "Eco-Friendly Carrybag">
+                    <p>Eco-Carrybag - ₹599</p>
+                </div>
+                <div class = "product">
+                    <img src = "images/Stylish_Handbag.jpg" alt = "Stylish Handbag">
+                    <p>Stylish Handbag - ₹799</p>
+                </div>
+                <div class = "product">
+                    <img src = "images/Jute_Carrybag.jpg" alt = "Jute Caryybag">
+                    <p>Jute Carrybag - ₹899</p>
+                </div>                                          
+            </div>
+        </div>
+
+        <div class = "product-section">
+            <h2>Under ₹499 Only</h2>
+            <div class = "product-list">
+                <div class = "product">
+                    <img src = "images/Classic_Handbag_Under_499.jpg" alt = "Classic Handbag Under ₹499">
+                    <p>Classic Handbag - ₹99</p>
+                </div>
+                <div class = "product">
+                    <img src = "images/Leather_Clutch_Under_499.avif" alt = "Leather Clutch Under ₹499">
+                    <p>Leather Clutch - ₹159</p>
+                </div>
+                <div class = "product">
+                    <img src = "images/Evening_Bag_Under_499.jpg" alt = "Evening Bag Under ₹499">
+                    <p>Evening Bag - ₹199</p>
+                </div>
+                <div class = "product">
+                    <img src = "images/Leather_Backack_Under_499.avif" alt = "Leather Backpack Under ₹499">
+                    <p>Leather Backpack - ₹259</p>
+                </div>
+                <div class = "product">
+                    <img src = "images/Travel_Duffel_Under_499.jpg" alt = "Travel Duffel Under ₹499">
+                    <p>Travel Duffel - ₹299</p>                    
+                </div>
+                <div class = "product">
+                    <img src = "images/Stylish_Tote_Bag_Under_499.jpg" alt = "Stylish Tote Bag">
+                    <p>Stylish Tote - ₹359</p>
+                </div> 
+                <div class = "product">
+                    <img src = "images/Eco_Friendly_Satchel_Under_499.jpg" alt = "Eco-Friendly Satchel">
+                    <p>Eco-Friendly Satchel - ₹399</p>
+                </div> 
+                <div class = "product">
+                    <img src = "images/Eco_Friendly_Carrybag_Under_499.jpg" alt = "Eco-Friendly Carrybag">
+                    <p>Eco-Friendly Carrybag - ₹489</p>
+                </div>                
+            </div>
+        </div>
+        
+        <div class="brand-directory">
+            <h2>Explore More in Bags</h2>
+            <div class="directory-grid">
+                <div>
+                    <strong>POPULAR BAG TYPES:</strong>
+                    <p>
+                         <a href="#">Tote Bags</a>
+                        |<a href="#">Sling Bags</a>
+                        |<a href="#">Duffel Bags</a>
+                        |<a href="#">Laptop Backpacks</a>
+                        |<a href="#">Messenger Bags</a>
+                        |<a href="#">Satchels</a>
+                        |<a href="#">Clutches</a>
+                        |<a href="#">Wallets</a>
+                    </p>
+                </div>
+                <div>
+                    <strong>BY OCCASION:</strong>
+                    <p>
+                         <a href="#">Office Bags</a>
+                        |<a href="#">College Bags</a>
+                        |<a href="#">Party Bags</a>
+                        |<a href="#">Gym Bags</a>
+                        |<a href="#">Travel Bags</a>
+                        |<a href="#">Shopping Bags</a>
+                        |<a href="#">Picnic Bags</a>
+                        |<a href="#">Daily Use Bags</a>
+                    </p>
+                </div>
+                <div>
+                    <strong>BY MATERIAL:</strong>
+                    <p>
+                         <a href="#">Leather</a>
+                        |<a href="#">Canvas</a>
+                        |<a href="#">Jute</a>
+                        |<a href="#">Nylon</a>
+                        |<a href="#">Denim</a>
+                        |<a href="#">Cotton</a>
+                        |<a href="#">Polyester</a>
+                        |<a href="#">Vegan Leather</a>
+                    </p>
+                </div>
+                <div>
+                    <strong>BY BRAND:</strong>
+                    <p>
+                         <a href="#">Lavie</a>
+                        |<a href="#">Caprese</a>
+                        |<a href="#">Baggit</a>
+                        |<a href="#">Lino Perros</a>
+                        |<a href="#">Wildcraft</a>
+                        |<a href="#">Skybags</a>
+                        |<a href="#">Puma</a>
+                        |<a href="#">Nike</a>
+                    </p>
+                </div>
+                <div>
+                    <strong>BY PRICE:</strong>
+                    <p>
+                         <a href="#">Under ₹199</a>
+                        |<a href="#">Under ₹499</a>
+                        |<a href="#">Under ₹999</a>
+                        |<a href="#">Under ₹1499</a>
+                        |<a href="#">₹1500 - ₹2500</a>
+                        |<a href="#">₹2500 & Above</a>
+                    </p>
+                </div>
+                <div>
+                    <strong>FEATURES & STYLES:</strong>
+                    <p>
+                         <a href="#">Water-Resistant</a>
+                        |<a href="#">Anti-Theft</a>
+                        |<a href="#">Foldable</a>
+                        |<a href="#">Expandable</a>
+                        |<a href="#">Minimalist</a>
+                        |<a href="#">Printed</a>
+                        |<a href="#">Transparent</a>
+                        |<a href="#">Quilted</a>
+                    </p>
+                </div>
+                <div>
+                    <strong>FOR WHOM:</strong>
+                    <p>
+                         <a href="#">Men</a>
+                        |<a href="#">Women</a>
+                        |<a href="#">Kids</a>
+                        |<a href="#">Unisex</a>
+                        |<a href="#">Teenagers</a>
+                        |<a href="#">Professionals</a>
+                    </p>
+                </div>
+                <div>
+                    <strong>TRAVEL-FRIENDLY:</strong>
+                    <p>
+                         <a href="#">Cabin Bags</a>
+                        |<a href="#">Rolling Duffels</a>
+                        |<a href="#">Trekking Bags</a>
+                        |<a href="#">Convertible Backpacks</a>
+                        |<a href="#">Weekenders</a>
+                    </p>
+                </div>
+                <div>
+                    <strong>ACCESSORIES:</strong>
+                    <p>
+                         <a href="#">Pouches</a>
+                        |<a href="#">Organizers</a>
+                        |<a href="#">Laptop Sleeves</a>
+                        |<a href="#">Makeup Bags</a>
+                        |<a href="#">Toiletry Kits</a>
+                    </p>
+                </div>
+                <div>
+                    <strong>LIMITED EDITIONS:</strong>
+                    <p>
+                         <a href="#">Designer Collections</a>
+                        |<a href="#">Handcrafted</a>
+                        |<a href="#">Festival Specials</a>
+                        |<a href="#">Ethnic Styles</a>
+                        |<a href="#">Sustainable Bags</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <footer class = "simple-footer">
+            <div class = "footer-links">
+                <a href = "contact_us.html">Contact Us</a>
+                <a href = "about_us.html">About Us</a>
+                <a href = "faqs.html">FAQs</a>
+                <a href = "privacy-policy.html">Privacy Policy</a>
+                <a href = "terms-of-services.html">Terms of Services</a>
+            </div>
+        </footer>
+
+        <script>
+            const loginLink = document.getElementById('loginLink');
+            const loginText = document.getElementById('loginText');
+
+            // On page load, set login text based on stored login state
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            loginText.textContent = isLoggedIn ? 'Logout' : 'Login';
+
+            loginLink.addEventListener('click', function (event) {
+                event.preventDefault(); // prevent default link behavior
+
+                if (loginText.textContent === 'Login') {
+                    // Set login state and redirect
+                    localStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = 'signin.html';
+                } else {
+                    // Logout: clear login state and update text
+                    localStorage.setItem('isLoggedIn', 'false');
+                    loginText.textContent = 'Login';
+                }
+            });
+            
+            document.addEventListener('click', function (event) {
+                const isClickInside = document.querySelector('.menu-container').contains(event.target);
+                if(!isClickInside) {
+                    document.getElementById('dropdownMenu').style.display = 'none';
+                }
+            });
+            
+            let slideIndex = 0;
+            const slides = document.querySelectorAll(".slide");
+        
+            function showSlides() {
+                slides.forEach((slide, index) => {
+                    slide.classList.remove("active");
+                });
+
+                slideIndex = (slideIndex + 1) % slides.length;
+                slides[slideIndex].classList.add("active");
+            }
+
+            slides[0].classList.add("active");
+            setInterval(showSlides, 3000);
+
+            function redirectToProducts(typeId) {
+                window.location.href = `products.html?typeId=${typeId}`;
+            }
+
+            function handleSearch() {
+                const query = document.getElementById('searchInput').value.trim();
+                if (query !== '') {
+                window.location.href = `products.html?q=${encodeURIComponent(query)}`;
+                }
+            }
+
+            document.getElementById('searchInput').addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    handleSearch();
+                }
+            });
+        </script>
+    </body>
+</html>

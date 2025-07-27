@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Become a Seller - BagNook</title>
+  <link rel="stylesheet" href="styles/become_seller.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Become a Seller - BagNook</h2>
+    <form id="sellerForm">
+      <!-- Personal Info -->
+      <label for="sellerName">Full Name / Business Name *</label>
+      <input type="text" id="sellerName" name="sellerName" required />
+
+      <label for="email">Email Address *</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone Number *</label>
+      <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required />
+
+      <!-- Business Info -->
+      <label for="sellerType">Type of Seller *</label>
+      <select id="sellerType" name="sellerType" required>
+        <option value="">-- Select --</option>
+        <option value="Individual">Individual</option>
+        <option value="Company">Company</option>
+      </select>
+
+      <label for="gstin">GSTIN / Tax ID *</label>
+      <input type="text" id="gstin" name="gstin" required />
+
+      <label for="address">Business Address *</label>
+      <input type="text" id="address" name="address" required />
+
+      <!-- Bank Info -->
+      <label for="accountName">Account Holder Name *</label>
+      <input type="text" id="accountName" name="accountName" required />
+
+      <label for="bankName">Bank Name *</label>
+      <input type="text" id="bankName" name="bankName" required />
+
+      <label for="accountNumber">Account Number *</label>
+      <input type="text" id="accountNumber" name="accountNumber" required />
+
+      <label for="ifsc">IFSC Code *</label>
+      <input type="text" id="ifsc" name="ifsc" required />
+
+      <label for="upi">UPI ID (Optional)</label>
+      <input type="text" id="upi" name="upi" />
+
+      <button type="submit">Register as Seller</button>
+      <div class="success" id="successMessage"></div>
+    </form>
+  </div>
+
+  <script>
+  document.getElementById("sellerForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const successMsg = document.getElementById("successMessage");
+
+    // Gather form data
+    const formData = {
+      sellerName: form.sellerName.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      sellerType: form.sellerType.value,
+      gstin: form.gstin.value,
+      address: form.address.value,
+      accountName: form.accountName.value,
+      bankName: form.bankName.value,
+      accountNumber: form.accountNumber.value,
+      ifsc: form.ifsc.value,
+      upi: form.upi.value
+    };
+
+    console.log("Seller Data Submitted:", formData);
+
+    successMsg.style.color = "green";
+    successMsg.textContent = "Seller registered successfully! Redirecting...";
+
+    // Redirect after 2 seconds
+    setTimeout(() => {
+      window.location.href = "seller-dashboard.html";
+    }, 2000);
+  });
+</script>
+</body>
+</html>

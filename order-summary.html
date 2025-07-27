@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Summary</title>
+   <link rel="stylesheet" href="styles/order-summary.css">
+</head>
+<body>
+  <h2>Your Order Summary</h2>
+  <div id="order-list"></div>
+  <div class="summary" id="summary"></div>
+  <button class="confirm-btn" onclick="confirmOrder()">Confirm Order</button>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const orderList = document.getElementById("order-list");
+    const summary = document.getElementById("summary");
+
+    let total = 0;
+
+    if (cart.length === 0) {
+      orderList.innerHTML = "<p>No items in cart.</p>";
+      summary.innerHTML = "";
+      document.querySelector(".confirm-btn").style.display = "none";
+    } else {
+      cart.forEach((item, index) => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `<strong>${item.Product_Name}</strong> - <span class="price">₹${item.Price}</span>`;
+        orderList.appendChild(div);
+        total += item.Price;
+      });
+
+      summary.innerHTML = `
+        <p>Total Items: <strong>${cart.length}</strong></p>
+        <p>Total Price: <strong>₹${total}</strong></p>
+      `;
+    }
+
+    function confirmOrder() {
+        window.location.href = `payment-mode.html?amount=${total}`;
+      }
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <link rel="stylesheet" href="styles/payment.css">
+    </head>
+    <body>
+    <div class="payment-box">
+        <h2>Payment Page</h2>
+        <p>Total Amount to Pay: <strong id="amount">₹0</strong></p>
+        <input type="password" id="password" placeholder="Enter your password" oninput="toggleButton()" />
+        <br>
+        <button id="confirmBtn" class="confirm-btn" disabled onclick="confirmPayment()">Confirm Payment</button>
+    </div>
+
+    <script>
+        // Get amount from URL
+        const params = new URLSearchParams(window.location.search);
+        const amount = params.get("amount") || "0";
+        document.getElementById("amount").textContent = `₹${amount}`;
+
+        function toggleButton() {
+        const password = document.getElementById("password").value;
+        const btn = document.getElementById("confirmBtn");
+        if (password.trim().length > 0) {
+            btn.disabled = false;
+            btn.classList.add("active");
+        } else {
+            btn.disabled = true;
+            btn.classList.remove("active");
+        }
+        }
+
+        function confirmPayment() {
+            localStorage.removeItem("cart");
+            window.location.href = "thankyou.html";
+        }
+    </script>
+    </body>
+    </html>

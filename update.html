@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Update Product - BagNook</title>
+    <link rel="stylesheet" href="styles/update.css">
+  </head>
+  <body>
+
+    <div class="form-container">
+      <h2>Update Product</h2>
+      <form id="updateForm" enctype="multipart/form-data">
+        <label for="PT_ID">Bag Category</label>
+        <select name="PT_ID" id="PT_ID" required>
+          <option value="">Select a category</option>
+          <option value="1">Casual Bag</option>
+          <option value="2">Handbag</option>
+          <option value="3">Travel Bag</option>
+          <option value="4">School Bag</option>
+          <option value="5">Gym Bag</option>
+          <option value="6">Laptop Bag</option>
+          <option value="7">Shopping Bag</option>
+          <option value="8">Camera Bag</option>
+          <option value="9">Evening/Party Bag</option>
+          <option value="10">Clutches/Purses</option>
+        </select>
+
+        <label for="oldName">Current Product Name</label>
+        <input type="text" name="oldName" id="oldName" placeholder="Enter existing product name" required>
+
+        <label for="Product_Name">New Product Name</label>
+        <input type="text" name="Product_Name" id="Product_Name" placeholder="Enter new product name">
+
+        <label for="Product_Desc">Product Description</label>
+        <textarea name="Product_Desc" id="Product_Desc" rows="3"></textarea>
+
+        <label for="Material">Material</label>
+        <input type="text" name="Material" id="Material">
+
+        <label for="Price">Price (₹)</label>
+        <input type="number" name="Price" id="Price" step="0.01">
+
+        <label for="ImageFile">Upload New Image</label>
+        <input type="file" name="ImageFile" id="ImageFile" accept="image/*">
+
+        <button type="submit">Update Product</button>
+      </form>    
+    </div>
+
+    <script>
+      document.getElementById('updateForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        try {
+          const res = await fetch('/api/update-product', {
+            method: 'POST',
+            body: formData
+          });
+
+          const data = await res.json();
+
+          if (res.ok) {
+            alert(data.message || "Product updated successfully!\nClick OK to view the updated product.");
+            const ptId = document.getElementById('PT_ID').value;
+            window.location.href = `products.html?typeId=${ptId}`;
+          } else {
+            alert(data.error || "Update failed. Please try again.");
+          }
+        } catch (err) {
+          alert("Network error. Please try again.");
+        }
+      });
+    </script>
+
+  </body>
+  </html>

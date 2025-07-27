@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Upload Product - BagNook</title>
+  <link rel="stylesheet" href="styles/upload.css">
+</head>
+<body>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <h2>Upload New Product</h2>
+
+    <label for="PT_ID">Product Type</label>
+    <select name="PT_ID" id="PT_ID" required>
+      <option value="">--Select Type--</option>
+      <option value="1">Casual Bag</option>
+      <option value="2">Handbag</option>
+      <option value="3">Travel Bag</option>
+      <option value="4">School Bag</option>
+      <option value="5">Gym Bag</option>
+      <option value="6">Laptop Bag</option>
+      <option value="7">Shopping Bag</option>
+      <option value="8">Camera Bag</option>
+      <option value="9">Evening/Party Bag</option>
+      <option value="10">Clutches/Purses</option>
+    </select>
+
+    <label for="Product_Name">Product Name</label>
+    <input type="text" id="Product_Name" name="Product_Name" required />
+
+    <label for="Product_Desc">Product Description</label>
+    <textarea id="Product_Desc" name="Product_Desc" rows="3" maxlength="255" required></textarea>
+
+    <label for="Material">Material</label>
+    <input type="text" id="Material" name="Material" required />
+
+    <label for="Price">Price (INR)</label>
+    <input type="number" id="Price" name="Price" step="0.01" required />
+
+    <label for="ImageFile">Product Image</label>
+    <input type="file" id="ImageFile" name="ImageFile" accept="image/*" required />
+
+    <button type="submit">Upload Product</button>
+  </form>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const form = document.getElementById('uploadForm');
+      const formData = new FormData(form);
+      const ptId = document.getElementById('PT_ID').value; // capture PT_ID
+
+      try {
+        const response = await fetch('/api/upload-product', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (!response.ok) throw new Error('Upload failed');
+
+        const result = await response.json();
+
+        if (window.confirm("✅ Product uploaded successfully!\nClick OK to view the uploaded product.")) {
+        // Redirect to products.html with typeId as query param
+            window.location.href = `products.html?typeId=${ptId}`;
+        } else {
+            form.reset(); // clear form if user presses Cancel
+        }
+
+      } catch (err) {
+        console.error('❌ Upload error:', err.message);
+        alert('❌ Upload failed. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>

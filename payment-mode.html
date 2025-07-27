@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Select Payment Mode</title>
+  <link rel="stylesheet" href="styles/payment-mode.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Select Payment Mode</h2>
+    <button class="payment-btn online" onclick="selectPayment('online')">Pay Online</button>
+    <button class="payment-btn cod" onclick="selectPayment('cod')">Cash on Delivery</button>
+  </div>
+
+  <script>
+    // Get amount from query parameter
+    const params = new URLSearchParams(window.location.search);
+    const amount = params.get("amount") || "0";
+
+    function selectPayment(mode) {
+      if (mode === 'online') {
+        window.location.href = `payment.html?amount=${amount}`;
+      } else if (mode === 'cod') {
+        localStorage.removeItem("cart");  // clear cart immediately
+        window.location.href = "thankyou.html";
+      }
+    }
+  </script>
+</body>
+</html>

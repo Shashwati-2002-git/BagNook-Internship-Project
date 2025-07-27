@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+    <link rel="stylesheet" href="styles/products.css">
+  </head>
+  <body>
+    <header>
+      <div class = "logo">BagNook</div>
+      <div class = "search-container">
+          <input id="searchInput" type = "text" placeholder = "Search for Bags, Brands and More...">
+          <button onclick="handleSearch()">Search</button>
+      </div>
+      <div class = "nav-icons">
+          <div class = "profile-dropdown">
+              <div class = "profile-link">
+                  <img class = "profile-pic" src = "images/Profile_Icon_Design.jpg" alt = "Profile Picture">
+                  <span>Logout</span>
+              </div>
+              <div class = "profile-menu">
+                  <a href="#">👤 My Profile</a>
+                  <a href="#">📦 Orders</a>
+                  <a href="#">❤️ Wishlist</a>
+                  <a href="#">🎁 Rewards</a>
+                  <a href="#">🎉 Gift Cards</a>
+              </div>
+          </div>
+          <a href = "order-summary.html" class = "cart-link">
+              <img class = "cart-pic" src = "images/Transparent_Cart_Logo_Design_Icon.png" alt = "Cart">
+              <span id="cart-count" class="cart-count"></span>
+          </a>
+          <a href = "become_seller.html" class = "seller-link">
+              <img class = "seller-pic" src = "images/Seller_Design_Icon.jpg" alt = "Become a Seller">
+              Become A Seller
+          </a>
+      </div>
+      <div class = "menu-container">
+          <span class = "menu-dot" onclick = "toggleMenu()">⋮</span>
+          <div class = "dropdown-menu" id = "dropdownMenu">
+              <a href="#">🔔 Notification</a>
+              <a href="#">⚙️ Preferences</a>
+              <a href="#">📞 24X7 Customer Care</a>
+              <a href="#">📢 Advertise</a>
+              <a href="#">⬇️ Download App</a>
+          </div> 
+      </div>
+    </header>
+
+    <div class="filter-sort-bar">
+      <div class="filter-options">
+        <select id="priceDropdown" onchange="filterByPrice(this.value)">
+          <option value="none">Filter by: Price</option>
+          <option value="below500">Below ₹500</option>
+          <option value="below1000">Below ₹1000</option>
+          <option value="below1500">Below ₹1500</option>
+          <option value="below2000">Below ₹2000</option>
+          <option value="above2000">Above ₹2000</option>
+        </select>
+        <select id="materialDropdown" onchange="filterByMaterial(this.value)">
+          <option value="none">Filter by: Materials</option>
+          <option value="Cotton">Cotton</option>
+          <option value="Jute">Jute</option>
+          <option value="Bioplastic">Bioplastic</option>
+          <option value="Plastic">Plastic</option>
+          <option value="Leather">Leather</option>
+        </select>
+        <button onclick="clearFilters()">Filter by: None</button>
+      </div>
+      
+      <div class="sort-options">
+        <button onclick="sortProducts('asc')">Sort by Price: Low to High</button>
+        <button onclick="sortProducts('desc')">Sort by Price: High to Low</button>
+        <button onclick="sortProducts('none')">Sort by: None</button>
+      </div>
+    </div>
+    
+    <div class="container" id="product-list">
+      <!-- Product cards will load here -->
+    </div>
+
+    <script>
+      let allProducts = [];
+      let selectedMaterial = 'none';
+      let selectedPrice = 'none';
+      let selectedSort = 'none';
+
+      function toggleMenu() {
+        const menu = document.getElementById('dropdownMenu');
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+      }
+
+      document.addEventListener('click', function (event) {
+        const isClickInside = document.querySelector('.menu-container')?.contains(event.target);
+        if (!isClickInside) {
+          document.getElementById('dropdownMenu').style.display = 'none';
+        }
+      });
+
+      function getUrlParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+          typeId: params.get('typeId'),
+          query: params.get('q')
+        };
+      }
+
+      async function loadProducts() {
+        const { typeId, query } = getUrlParams();
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = '';
+
+        try {
+          let res;
+          if (query) {
+            res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+          } else if (typeId) {
+            res = await fetch(`/api/products?typeId=${typeId}`);
+          } else {
+            productList.innerHTML = `<div class="error">Please select a category or search something.</div>`;
+            return;
+          }
+
+          const products = await res.json();
+
+          if (!Array.isArray(products)) {
+            throw new Error(products.error || "Invalid response format.");
+          }
+
+          allProducts = products;
+          renderProducts(allProducts);
+        } catch (err) {
+          console.error("Error loading products:", err);
+          productList.innerHTML = `<div class="error">❌ Failed to load products. Please try again later.</div>`;
+        }
+      }
+
+      function renderProducts(products) {
+        const productList = document.getElementById('product-list');
+        productList.innerHTML = '';
+
+        if (products.length === 0) {
+          productList.innerHTML = "<div class='error'>No products found for this category.</div>";
+          return;
+        }
+
+        products.forEach(product => {
+          const div = document.createElement("div");
+          div.className = "item";
+          div.innerHTML = `
+            <img src="images/${product.ImagePath}" alt="${product.Product_Name}">
+            <div class="desc">${product.Product_Name}</div>
+            <div class="price">₹${product.Price}</div>
+            <div class="desc">${product.Product_Desc}</div>
+            <button onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
+            <button onclick='buyNow(${JSON.stringify(product)})'>Buy Now</button>
+          `;
+          productList.appendChild(div);
+        });
+      }
+
+      function filterByMaterial(material) {
+        selectedMaterial = material;
+        applyFiltersAndSort();
+      }
+
+      function filterByPrice(range) {
+        selectedPrice = range;
+        applyFiltersAndSort();
+      }
+
+      function sortProducts(order) {
+        selectedSort = order;
+        applyFiltersAndSort();
+      }
+
+      function applyFiltersAndSort() {
+        let filtered = [...allProducts];
+
+        if (selectedMaterial !== 'none') {
+          filtered = filtered.filter(product =>
+            product.Material.toLowerCase() === selectedMaterial.toLowerCase()
+          );
+        }
+
+        switch (selectedPrice) {
+          case 'below500':
+            filtered = filtered.filter(product => product.Price < 500);
+            break;
+          case 'below1000':
+            filtered = filtered.filter(product => product.Price < 1000);
+            break;
+          case 'below1500':
+            filtered = filtered.filter(product => product.Price < 1500);
+            break;
+          case 'below2000':
+            filtered = filtered.filter(product => product.Price < 2000);
+            break;
+          case 'above2000':
+            filtered = filtered.filter(product => product.Price > 2000);
+            break;
+        }
+
+        if (selectedSort === 'asc') {
+          filtered.sort((a, b) => a.Price - b.Price);
+        } else if (selectedSort === 'desc') {
+          filtered.sort((a, b) => b.Price - a.Price);
+        }
+
+        renderProducts(filtered);
+      }
+
+      function clearFilters() {
+        selectedMaterial = 'none';
+        selectedPrice = 'none';
+
+        document.getElementById('materialDropdown').value = 'none';
+        document.getElementById('priceDropdown').value = 'none';
+
+        applyFiltersAndSort();
+      }
+
+      function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+      }
+
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        document.getElementById("cart-count").textContent = cart.length;
+      }
+
+      function buyNow(product) {
+        localStorage.setItem("cart", JSON.stringify([product]));
+        window.location.href = "order-summary.html";
+      }
+
+      async function handleSearch() {
+        const query = document.getElementById('searchInput').value.trim();
+        if (query === '') return;
+
+        window.location.href = `products.html?q=${encodeURIComponent(query)}`;
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('searchInput').addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            handleSearch();
+          }
+        });
+
+        updateCartCount();
+        loadProducts();
+      });
+    </script>
+
+  </body>
+  </html>

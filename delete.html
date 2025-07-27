@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Delete Product - BagNook</title>
+    <link rel="stylesheet" href="styles/delete.css">
+  </head>
+  <body>
+
+    <form id="deleteForm">
+      <h2>Delete Product</h2>
+
+      <label for="PT_ID">Select Bag Category:</label>
+      <select id="PT_ID" name="PT_ID" required>
+        <option value="">--Select Category--</option>
+        <option value="1">Casual Bag</option>
+        <option value="2">Handbag</option>
+        <option value="3">Travel Bag</option>
+        <option value="4">School Bag</option>
+        <option value="5">Gym Bag</option>
+        <option value="6">Laptop Bag</option>
+        <option value="7">Shopping Bag</option>
+        <option value="8">Camera Bag</option>
+        <option value="9">Evening/Party Bag</option>
+        <option value="10">Clutches/Purses</option>
+      </select>
+
+      <label for="Product_Name">Enter Product Name:</label>
+      <input type="text" id="Product_Name" name="Product_Name" required>
+
+      <button type="submit">Delete Product</button>
+    </form>
+
+    <script>
+      document.getElementById('deleteForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const Product_Name = document.getElementById('Product_Name').value.trim();
+        const PT_ID = document.getElementById('PT_ID').value;
+
+        try {
+          const response = await fetch('/api/delete-product', {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ Product_Name, PT_ID })
+          });
+
+          const result = await response.json();
+
+          if (response.ok) {
+            alert(result.message);
+            window.location.href = `products.html?typeId=${PT_ID}`;
+          } else {
+            alert(result.error || '❌ Something went wrong.');
+          }
+        } catch (error) {
+          alert('❌ Error: ' + error.message);
+        }
+      });
+    </script>
+  </body>
+  </html>
